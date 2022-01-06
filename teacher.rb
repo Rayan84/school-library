@@ -1,11 +1,13 @@
-class Teacher
+require_relative 'person.rb'
+
+class Teacher < Person
   
-  def initialize(name = null, age, parent_permission = true)
-    @id = id
-    @name = name
-    @age = age
-    @parent_permission = parent_permission
+  def initialize(specialization, age, name = 'unknown', parent_permission = 'true')
+    super(age, name, parent_permission)
+    @specialization = specialization
   end
 
-  
+  def can_use_services?
+    return true
+  end
 end

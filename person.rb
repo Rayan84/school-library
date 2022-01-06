@@ -1,4 +1,6 @@
 class Person
+  attr_accessor :name, :age
+
   def initialize(age, name = "Unknown", parent_permission = 'true')
     @name = name
     @age = age
@@ -40,6 +42,8 @@ class Person
       puts 'false'
     end
   end
+
+  private :is_of_age?
 end
 
 
