@@ -6,6 +6,7 @@ class Person
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @id = Time.now.to_i
   end
 
   def of_age?
@@ -14,8 +15,6 @@ class Person
 
   def can_use_services?
     return true if of_age? || @parent_permission
-
-    false
   end
 
   private :of_age?
