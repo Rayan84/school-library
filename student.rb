@@ -1,16 +1,15 @@
-require_relative 'person.rb'
+require_relative 'person'
 
 class Student < Person
   attr_reader :classrom
-  
+
   def initialize(classroom, age, name = 'unknown', parent_permission = 'true')
     super(age, name, parent_permission)
     @classroom = classroom
   end
 
   def play_hooky
-    return "¯\(ツ)/¯"
+    "¯\(ツ)/¯"
   end
   puts 'student here!'
 end
-
