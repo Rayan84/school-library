@@ -122,8 +122,11 @@ end
 
 def welcome_msg
   puts ''
-  puts "======= Welcom To School Library Applicaiton ======
-  please choose an option by entering the relevant number:
+  puts "======= Welcom To School Library Applicaiton ======"
+end
+
+def options
+  puts "please choose an option by entering the relevant number:
 
   1- List all books
   2- List all people
@@ -139,8 +142,9 @@ def main
   books = []
   people = []
   rentals = []
+  welcome_msg
   loop do
-    welcome_msg
+    options
     check_input(people, books, rentals)
   end
 end

@@ -7,7 +7,7 @@
 
   - `git clone https://github.com/Rayan84/school-library.git`
   - `cd school-library`
-  - `ruby the/path/to/person.rb`
+  - `ruby the/path/to/main.rb`
 
 ## Authors
 
