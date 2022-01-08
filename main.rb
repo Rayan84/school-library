@@ -122,7 +122,7 @@ end
 
 def welcome_msg
   puts ''
-  puts "======= Welcom To School Library Applicaiton ======"
+  puts '======= Welcom To School Library Applicaiton ======'
 end
 
 def options
