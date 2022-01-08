@@ -2,6 +2,10 @@
 
 > This project is a Ruby based application, it demonstartes OOP concept of the Ruby language through creating classes and constructors, in addition to other features like methods, inheritance and more.
 
+
+## Screenshot
+<img src='./screenshot.png'>
+
 ## Getting started
   Run the following commands on the terminal your local machine:
 
