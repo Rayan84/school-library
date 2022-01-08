@@ -8,8 +8,13 @@ class Student < Person
     @classroom = classroom
   end
 
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students.push(slef) unless  classroom.students.include?(self)
+    end
+  end
+
   def play_hooky
     "¯\(ツ)/¯"
   end
-  puts 'student here!'
 end
