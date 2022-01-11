@@ -4,6 +4,7 @@ require_relative 'student'
 require_relative 'rental'
 require_relative 'teacher'
 require_relative 'classroom'
+require_relative 'functions'
 
 def create_teacher(people)
   print 'Please enter the name: '
@@ -44,13 +45,9 @@ def create_person(people)
   end
 end
 
-def list_books(books)
-  puts 'List of the books: '
-  puts books
-  books.each do |book|
-    puts "Title: #{book.title}, Author: #{book.author}"
-  end
-  puts "\n"
+def view_books (books)
+  listing = Functions.new(books)
+  listing.list_books
 end
 
 def create_book(books)
@@ -99,11 +96,11 @@ def list_rentals(people)
 end
 
 # rubocop:disable Metrics/CyclomaticComplexity
-def check_input(people, books, rentals)
+def check_input(books, people, rentals)
   answer = gets.chomp.to_i
   case answer
   when 1
-    list_books(books)
+    view_books(books)
   when 2
     list_people(people)
   when 3
@@ -118,6 +115,7 @@ def check_input(people, books, rentals)
     !exit
   end
 end
+
 # rubocop:enable Metrics/CyclomaticComplexity
 
 def welcome_msg
@@ -145,7 +143,7 @@ def main
   welcome_msg
   loop do
     options
-    check_input(people, books, rentals)
+    check_input(books, people, rentals)   
   end
 end
 main
