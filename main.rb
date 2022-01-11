@@ -45,7 +45,7 @@ def create_person(people)
   end
 end
 
-def view_books (books)
+def view_books(books)
   listing = Functions.new(books)
   listing.list_books
 end
@@ -142,7 +142,7 @@ def main
   welcome_msg
   loop do
     options
-    check_input(books, people, rentals)   
+    check_input(books, people, rentals)
   end
 end
 main
