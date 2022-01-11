@@ -45,23 +45,10 @@ def create_person(people)
   end
 end
 
-def view_books(books)
-  listing = Functions.new(books)
-  listing.list_books
-end
-
 def create_book(books)
-  print 'Please enter book title: '
-  title = gets.chomp.to_s
-  print 'Please enter book author: '
-  author = gets.chomp.to_s
-  books.push(Book.new(title, author))
+  create = Functions.new(books)
+  books.push(create.create_book)
   puts 'Book created successfully!..'
-end
-
-def view_people(people)
-  listing = Functions.new(people)
-  listing.list_people
 end
 
 def create_rental(books, people, rentals)
@@ -99,9 +86,11 @@ def check_input(books, people, rentals)
   answer = gets.chomp.to_i
   case answer
   when 1
-    view_books(books)
+    listing = Functions.new(books)
+    listing.list_books
   when 2
-    view_people(people)
+    listing = Functions.new(people)
+    listing.list_people
   when 3
     create_person(people)
   when 4
@@ -118,12 +107,11 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 
 def welcome_msg
-  puts ''
-  puts '======= Welcom To School Library Applicaiton ======'
+  puts "======= Welcom To School Library Applicaiton ======"
 end
 
 def options
-  puts "please choose an option by entering the relevant number:
+  puts $/+"please choose an option by entering the relevant number:
 
   1- List all books
   2- List all people
