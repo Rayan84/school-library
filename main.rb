@@ -59,10 +59,9 @@ def create_book(books)
   puts 'Book created successfully!..'
 end
 
-def list_people(people)
-  people.each do |person|
-    puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  end
+def view_people(people)
+  listing = Functions.new(people)
+  listing.list_people
 end
 
 def create_rental(books, people, rentals)
@@ -102,7 +101,7 @@ def check_input(books, people, rentals)
   when 1
     view_books(books)
   when 2
-    list_people(people)
+    view_people(people)
   when 3
     create_person(people)
   when 4
