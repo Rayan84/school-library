@@ -25,8 +25,7 @@ class Functions
     title = gets.chomp.to_s
     print 'Please enter book author: '
     author = gets.chomp.to_s
-    new_book = Book.new(title, author)
-    return new_book
+    Book.new(title, author)
   end
 
   def create_person
@@ -68,38 +67,33 @@ class Functions
     puts 'Persone created successfully!'
   end
 
-    
-def list_rentals
-  puts 'please enter the id'
-  id = gets.chomp
-  @items.people.each do |person|
-    next unless person.id == id.to_i
+  def list_rentals
+    puts 'please enter the id'
+    id = gets.chomp
+    @items.people.each do |person|
+      next unless person.id == id.to_i
 
-    person.rentals.each do |rental|
-      puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
+      person.rentals.each do |rental|
+        puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
+      end
     end
   end
-end
 
-def create_rental
-  puts 'Choose a book: '
-  @items.books.each_with_index do |book, i|
-    puts "#{i} Title: #{book.title}, Author: #{book.author}"
+  def create_rental
+    puts 'Choose a book: '
+    @items.books.each_with_index do |book, i|
+      puts "#{i} Title: #{book.title}, Author: #{book.author}"
+    end
+    book = @items.books[gets.chomp.to_i]
+    puts 'Choose a person: '
+    @items.people.each_with_index do |person, i|
+      puts "#{i} [#{person.class}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
+    end
+    lessor = @items.people[gets.chomp.to_i]
+
+    print 'Date: '
+    date = gets.chomp
+    @items.rentals.push(Rental.new(date, lessor, book))
+    puts 'Rental created succefully'
   end
-  book = @items.books[gets.chomp.to_i]
-  puts 'Choose a person: '
-  @items.people.each_with_index do |person, i|
-    puts "#{i} [#{person.class}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
-  end
-  lessor = @items.people[gets.chomp.to_i]
-
-  print 'Date: '
-  date = gets.chomp
-  @items.rentals.push(Rental.new(date, lessor, book))
-  puts 'Rental created succefully'
-end
-
-  
-
-
 end
