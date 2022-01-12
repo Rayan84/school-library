@@ -16,24 +16,6 @@ class App
   end
 end
 
-def create_rental(app)
-  puts 'Choose a book: '
-  app.books.each_with_index do |book, i|
-    puts "#{i} Title: #{book.title}, Author: #{book.author}"
-  end
-  book = app.books[gets.chomp.to_i]
-  puts 'Choose a person: '
-  app.people.each_with_index do |person, i|
-    puts "#{i} [#{person.class}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
-  end
-  lessor = app.people[gets.chomp.to_i]
-
-  print 'Date: '
-  date = gets.chomp
-  app.rentals.push(Rental.new(date, lessor, book))
-  puts 'Rental created succefully'
-end
-
 # rubocop:disable Metrics/CyclomaticComplexity
 def check_input(app)
   answer = gets.chomp.to_i
@@ -53,7 +35,9 @@ def check_input(app)
     app.books.push(create.create_book)
     puts 'Book created successfully!..'
   when 5
-    create_rental(app)
+    #create_rental(app)
+    create = Functions.new(app)
+    app.rentals.push(create.create_rental)
   when 6
     #list_rentals(app.people)
     listing = Functions.new(app)

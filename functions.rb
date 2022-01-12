@@ -81,6 +81,24 @@ def list_rentals
   end
 end
 
+def create_rental
+  puts 'Choose a book: '
+  @items.books.each_with_index do |book, i|
+    puts "#{i} Title: #{book.title}, Author: #{book.author}"
+  end
+  book = @items.books[gets.chomp.to_i]
+  puts 'Choose a person: '
+  @items.people.each_with_index do |person, i|
+    puts "#{i} [#{person.class}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
+  end
+  lessor = @items.people[gets.chomp.to_i]
+
+  print 'Date: '
+  date = gets.chomp
+  @items.rentals.push(Rental.new(date, lessor, book))
+  puts 'Rental created succefully'
+end
+
   
 
 
