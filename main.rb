@@ -17,33 +17,29 @@ class App
 end
 
 # rubocop:disable Metrics/CyclomaticComplexity
+
 def check_input(app)
   answer = gets.chomp.to_i
+  functions_instance = Functions.new(app)
+  functions_instance_books = Functions.new(app.books)
   case answer
   when 1
-    listing = Functions.new(app.books)
-    listing.list_books
+    functions_instance_books.list_books
   when 2
     listing = Functions.new(app.people)
     listing.list_people
   when 3
-    create = Functions.new(app)
-    create.create_person
+    functions_instance.create_person
   when 4
-    create = Functions.new(app.books)
-    app.books.push(create.create_book)
-    puts 'Book created successfully!..'
+    app.books.push(functions_instance_books.create_book)
   when 5
-    create = Functions.new(app)
-    app.rentals.push(create.create_rental)
+    app.rentals.push(functions_instance.create_rental)
   when 6
-    listing = Functions.new(app)
-    listing.list_rentals
+    functions_instance.list_rentals
   when 7
     !exit
   end
 end
-
 # rubocop:enable Metrics/CyclomaticComplexity
 
 def welcome_msg
@@ -51,7 +47,8 @@ def welcome_msg
 end
 
 def options
-  puts $/ + "please choose an option by entering the relevant number:
+  puts ' '
+  puts 'please choose an option by entering the relevant number:
 
   1- List all books
   2- List all people
@@ -60,7 +57,7 @@ def options
   5- Create a rental
   6- List all rentals for a given id
   7- Exit
-  "
+  '
 end
 
 def main

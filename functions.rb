@@ -26,6 +26,7 @@ class Functions
     print 'Please enter book author: '
     author = gets.chomp.to_s
     Book.new(title, author)
+    puts 'Book created successfully!..'
   end
 
   def create_person
