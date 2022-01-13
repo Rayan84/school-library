@@ -8,14 +8,16 @@ class Functions
 
   def list_books
     puts 'List of the books: '
-    @items.each do |item|
+    puts @items
+    puts @items.class
+    @items.books.each do |item|
       puts "Title: #{item.title}, Author: #{item.author}"
     end
     puts "\n"
   end
 
   def list_people
-    @items.each do |item|
+    @items.people.each do |item|
       puts "[#{item.class}] Name: #{item.name}, ID: #{item.id}, Age: #{item.age}"
     end
   end
@@ -25,7 +27,7 @@ class Functions
     title = gets.chomp.to_s
     print 'Please enter book author: '
     author = gets.chomp.to_s
-    Book.new(title, author)
+    @items.books.push(Book.new(title, author))
     puts 'Book created successfully!..'
   end
 

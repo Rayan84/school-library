@@ -17,21 +17,18 @@ class App
 end
 
 # rubocop:disable Metrics/CyclomaticComplexity
-
 def check_input(app)
   answer = gets.chomp.to_i
   functions_instance = Functions.new(app)
-  functions_instance_books = Functions.new(app.books)
   case answer
   when 1
-    functions_instance_books.list_books
+    functions_instance.list_books
   when 2
-    listing = Functions.new(app.people)
-    listing.list_people
+    functions_instance.list_people
   when 3
     functions_instance.create_person
   when 4
-    app.books.push(functions_instance_books.create_book)
+    functions_instance.create_book
   when 5
     app.rentals.push(functions_instance.create_rental)
   when 6
