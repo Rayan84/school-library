@@ -5,6 +5,7 @@ require_relative 'rental'
 require_relative 'teacher'
 require_relative 'classroom'
 require_relative 'functions'
+require 'json'
 
 class App
   attr_accessor :people, :books, :rentals
@@ -14,6 +15,17 @@ class App
     @books = []
     @rentals = []
   end
+end
+
+def preserve_data(session)
+  people = File.new('people.json', 'w')
+  people.write(session.people.to_s.to_json)
+
+  books = File.new('books.json', 'w')
+  books.write(session.books.to_s.to_json)
+
+  rentals = File.new('rentals.json', 'w')
+  rentals.write(session.rentals.to_s.to_json)
 end
 
 # rubocop:disable Metrics/CyclomaticComplexity
@@ -34,6 +46,8 @@ def check_input(app)
   when 6
     functions_instance.list_rentals
   when 7
+    preserve_data(app)
+    puts 'See you soon'
     !exit
   end
 end
