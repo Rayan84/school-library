@@ -8,18 +8,16 @@ class Functions
 
   def list_books
     puts 'List of the books: '
-    puts @items
-    puts @items.class
     @items.books.each do |item|
       puts "Title: #{item.title}, Author: #{item.author}"
     end
-    puts "\n"
   end
 
   def list_people
     @items.people.each do |item|
       puts "[#{item.class}] Name: #{item.name}, ID: #{item.id}, Age: #{item.age}"
     end
+    puts "\n"
   end
 
   def create_book
