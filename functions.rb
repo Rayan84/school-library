@@ -15,7 +15,11 @@ class Functions
 
   def list_people
     @items.people.each do |item|
-      puts "[#{item.class}] Name: #{item.name}, ID: #{item.id}, Age: #{item.age}"
+      if item.class == Teacher
+        puts "[#{item.class}] Name: #{item.name}, ID: #{item.id}, Age: #{item.age}"
+      else
+        puts "[#{item.class}] Name: #{item.name}, ID: #{item.id}, Age: #{item.age}" 
+      end
     end
     puts "\n"
   end
@@ -62,10 +66,22 @@ class Functions
     name = gets.chomp.to_s
     print 'Please enter the age: '
     age = gets.chomp.to_i
-    print "Parent's permission? [Y/N]: "
-    permission = gets.chomp
-    people.push(Student.new(age, name, permission))
-    puts 'Persone created successfully!'
+    positive = ['y', 'Y', 'yes', 'Yes', 'YES']
+    negative = ['n', 'N', 'no', 'No', 'NO']
+    permission = ''
+    loop do 
+      print "Parent's permission? [Y/N]: "
+      permission = gets.chomp
+      break if ['y', 'Y', 'yes', 'Yes', 'YES', 'n', 'N', 'no', 'No', 'NO'].include?(permission)
+    end
+    if positive.include?(permission)
+      permission = true
+    else
+      permission = false
+    end
+
+    people.push(Student.new(permission, age, name))
+    puts 'Person created successfully!'
   end
 
   def list_rentals

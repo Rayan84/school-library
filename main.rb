@@ -23,29 +23,35 @@ end
 
 def preserve_data(session)
   # people
+  puts 'saving person data...'
+  people_file = File.open('people.json', 'w')
   people_array = []
-  if session.people_file == true
-    people_json_file = File.open('people.json', 'a')
-    puts 'open append'
-  else
-    people_json_file = File.new('people.json', 'w')
-    puts 'new write'
-  end
-  people_hash = {}
-  people_hash = {
-    'id' => '',
-    'name' => '',
-    'age' => '',
-    'parent_permissiom' => '',
-    'specialization' => ''
-  }
   session.people.each do |person|
-    people_hash['name'] = person.name
-    people_hash['id'] = person.id
-    people_hash['age'] = person.age
-    people_array.push(people_hash)
+    if person.class == Student
+      puts 'person class is :'
+      puts person.class
+      person = {
+        id: person.id,
+        age: person.age,
+        name: person.name,
+        #parent_permission: person.parent_permission,
+        class: person.class
+        }
+     else 
+        person = {
+          id: person.id,
+          name: person.name,
+          age: person.age,
+          specialization: person.specialization,
+          class: person.class
+        }
+      
+
+    end
+      
+    people_array.push(person)
   end
-  people_json_file.write(JSON.pretty_generate(people_array))
+  people_file.write(JSON.pretty_generate(people_array))
 
   # books
   books_file = File.open('books.json', 'w')
@@ -65,6 +71,7 @@ def preserve_data(session)
 end
 
 def load_data(application)
+  # books json
   if File.exist?('books.json')
     puts 'books.json exists'
     application.books_file = true
@@ -74,24 +81,45 @@ def load_data(application)
       books_file = File.open('books.json', 'r')
       books = books_file.read
       parsed_books = JSON.parse(books)
-      puts books
-      puts parsed_books
-
       parsed_books.each do |book|
-        p 'book title is: '
-        puts book['title']
-        # puts book.title
-        p 'book author is: '
-        puts book['author']
         application.books.push(Book.new(book['title'], book['author']))
       end
     end
   end
-  puts 'people.json exists' if File.exist?('people.json')
-  application.people_file = true
-  if File.exist?('rentals.json')
-    puts 'rentals.json exists'
-    application.rentals_file = true
+
+  #people json
+  if File.exist?('people.json')
+    puts 'people.json exists'
+    application.people_file = true
+    unless File.zero?('people.json')
+      puts 'loading people...'
+      people_file = File.open('people.json', 'r')
+      people = people_file.read()
+      #puts people
+      people_parsed = JSON.parse(people)
+      #puts people_parsed
+      people_parsed.each do |person|
+        print 'person name is: '
+        puts person['name']
+        print 'person id is: '
+        puts person['id']
+        print 'person age is: '
+        puts person['age']
+        if person['class'] == 'Student'
+          puts 'retrieved person class is student'
+          application.people.push(Student.new('Y', person['age'], person['name']))
+          # application.people.push({
+          #   id: person['id'],
+          #   name: person['name'],
+          #   age: person['age'],
+          #   class: person['class']
+          #   })
+        else
+        #  puts 'retrieved person class is Teacher '
+          application.people.push(Teacher.new(person['specialization'], person['age'], person['name']))
+        end
+      end
+    end
   end
 end
 
