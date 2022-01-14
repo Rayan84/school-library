@@ -22,6 +22,7 @@ class App
 end
 
 def preserve_data(session)
+  
   # people
   puts 'saving person data...'
   people_file = File.open('people.json', 'w')
@@ -45,8 +46,6 @@ def preserve_data(session)
           specialization: person.specialization,
           class: person.class
         }
-      
-
     end
       
     people_array.push(person)
@@ -66,8 +65,24 @@ def preserve_data(session)
   books_file.write(JSON.pretty_generate(books))
 
   # rentals
-  rentals = File.new('rentals.json', 'w')
-  rentals.write(session.rentals.to_s)
+  rentals_file = File.open('rentals.json', 'w')
+  rentals = []
+  session.people.each do |person|
+    person.rentals.each do |rental|
+      puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
+      rental = {
+        person: person.name,
+        person_class: person.class,
+        person_id: person.id,
+        date: rental.date,
+        book: rental.book.title,
+        author: rental.book.author
+      }
+      rentals.push(rental)
+    end
+  end
+
+  rentals_file.write(JSON.pretty_generate(rentals))
 end
 
 def load_data(application)
@@ -108,14 +123,7 @@ def load_data(application)
         if person['class'] == 'Student'
           puts 'retrieved person class is student'
           application.people.push(Student.new('Y', person['age'], person['name']))
-          # application.people.push({
-          #   id: person['id'],
-          #   name: person['name'],
-          #   age: person['age'],
-          #   class: person['class']
-          #   })
         else
-        #  puts 'retrieved person class is Teacher '
           application.people.push(Teacher.new(person['specialization'], person['age'], person['name']))
         end
       end
