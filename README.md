@@ -13,6 +13,11 @@
   - `cd school-library`
   - `ruby the/path/to/main.rb`
 
+  To run the tests:
+
+  - `Run gem install rspec to install RSpec`
+  - `Run rspec spec --format documentation to run the tests`
+
 ## Authors
 
 👤 **Rayan Rassam**
@@ -20,6 +25,11 @@
 - GitHub: [@Rayan84](https://github.com/Rayan84)
 - Twitter: [@Rayan65096267](https://twitter.com/Rayan65096267)
 - LinkedIn: [Rayan Rassam](https://www.linkedin.com/in/rayan-rassam/)
+
+👤 **Mahbub Alam**
+- GitHub: [@mahbubul14](https://github.com/mahbubul14)
+- Twitter: [@twitterhandle](https://twitter.com/mahbubul_14)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mahbubul14/)
 
 ## 🤝 Contributing
 
