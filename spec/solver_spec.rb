@@ -13,6 +13,10 @@ describe Solver do
     it('should check of factorial of a number') do
       expect(@solver.factorial(5)).to eq 120
     end
+
+    it('should check of factorial of a number') do
+      expect(@solver.factorial(0)).to eq 1
+    end
   end
 
   describe '#fizzbuzz' do
@@ -26,6 +30,10 @@ describe Solver do
 
     it 'Should verify if the number is multiple of 5' do
       expect(@solver.fizzbuzz(10)).to eq 'buzz'
+    end
+
+    it 'Should return same number if not divisible 3 and 5' do
+      expect(@solver.fizzbuzz(22)).to eql 22
     end
   end
 
