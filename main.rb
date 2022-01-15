@@ -1,68 +1,60 @@
-require_relative 'book'
-require_relative 'person'
-require_relative 'student'
-require_relative 'rental'
-require_relative 'teacher'
-require_relative 'classroom'
-require_relative 'functions'
+# !/usr/bin/env ruby
+require_relative 'handler'
+require_relative 'file_handler'
 
-class App
-  attr_accessor :people, :books, :rentals
+class Program
+  include Handlers
+  include HandlersFile
 
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @peoples = load_peoples
+    @books = load_books
+    @rentals = load_rentals
   end
-end
 
-# rubocop:disable Metrics/CyclomaticComplexity
-def check_input(app)
-  answer = gets.chomp.to_i
-  functions_instance = Functions.new(app)
-  case answer
-  when 1
-    functions_instance.list_books
-  when 2
-    functions_instance.list_people
-  when 3
-    functions_instance.create_person
-  when 4
-    functions_instance.create_book
-  when 5
-    app.rentals.push(functions_instance.create_rental)
-  when 6
-    functions_instance.list_rentals
-  when 7
-    !exit
+  def display_welcome
+    puts 'Welcome to School Library App!'
+    puts "\n"
+    puts 'Please choose an option by entering a number:'
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
   end
-end
-# rubocop:enable Metrics/CyclomaticComplexity
 
-def welcome_msg
-  puts '======= Welcom To School Library Applicaiton ======'
-end
-
-def options
-  puts ' '
-  puts 'please choose an option by entering the relevant number:
-
-  1- List all books
-  2- List all people
-  3- Create a person
-  4- Create a book
-  5- Create a rental
-  6- List all rentals for a given id
-  7- Exit
-  '
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def run
+    case gets.chomp
+    when '1'
+      list_books(@books)
+    when '2'
+      list_all_peoples(@peoples)
+    when '3'
+      @peoples.push(create_person)
+    when '4'
+      create_book
+    when '5'
+      @rentals.push(create_rental(@books, @peoples.last))
+      puts "\n"
+    when '6'
+      list_rental(@peoples)
+    when '7'
+      persist_data
+      !exit
+    end
+  end
+  # rubocop:enable Metrics/CyclomaticComplexity
 end
 
 def main
-  app = App.new
-  welcome_msg
+  program = Program.new
   loop do
-    options
-    check_input(app)
+    program.display_welcome
+    program.run
   end
 end
+
 main
