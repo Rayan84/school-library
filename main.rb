@@ -114,18 +114,43 @@ def load_data(application)
       people_parsed = JSON.parse(people)
       #puts people_parsed
       people_parsed.each do |person|
-        print 'person name is: '
-        puts person['name']
-        print 'person id is: '
-        puts person['id']
-        print 'person age is: '
-        puts person['age']
         if person['class'] == 'Student'
-          puts 'retrieved person class is student'
-          application.people.push(Student.new('Y', person['age'], person['name']))
+          new_student = Student.new('Y', person['age'], person['name'])
+          new_student.id = person['id']
+          application.people.push(new_student)
         else
-          application.people.push(Teacher.new(person['specialization'], person['age'], person['name']))
+          new_teacher = Teacher.new(person['specialization'], person['age'], person['name'])
+          new_teacher.id = person['id']
+          application.people.push(new_teacher)
         end
+      end
+    end
+  end
+
+  #rentals json
+  if File.exist?('rentals.json')
+    puts 'rentals.json exists'
+    application.rentals_file = true
+    unless File.zero?('rentals.json')
+      rentals_file = File.open('rentals.json', 'r')
+      rentals = rentals_file.read()
+      rentals_parsed = JSON.parse(rentals)
+      rentals_parsed.each do |item|
+        rentee = ''
+        book_item = ''
+        application.people.each do |person_two|
+          if person_two.id == item['person_id']
+            puts person_two
+            rentee = person_two
+          end
+        end
+        application.books.each do |book|
+          if book.title == item['book']
+            puts book
+            book_item = book
+          end
+        end
+        application.rentals.push(Rental.new(item['date'], rentee, book_item))
       end
     end
   end

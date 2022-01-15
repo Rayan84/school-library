@@ -88,7 +88,7 @@ class Functions
     puts 'please enter the id'
     id = gets.chomp
     @items.people.each do |person|
-      #next unless person.id == id.to_i
+      next unless person.id == id.to_i
 
       person.rentals.each do |rental|
         puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
@@ -106,11 +106,13 @@ class Functions
     @items.people.each_with_index do |person, i|
       puts "#{i} [#{person.class}] Name: #{person.name}, ID: #{person.id} Age: #{person.age}"
     end
-    lessee = @items.people[gets.chomp.to_i]
+    rentee = @items.people[gets.chomp.to_i]
 
     print 'Date: '
     date = gets.chomp
-    @items.rentals.push(Rental.new(date, lessee, book))
+    @items.rentals.push(Rental.new(date, rentee, book))
+    puts rentee
+    puts book
     puts 'Rental created succefully'
   end
 end
