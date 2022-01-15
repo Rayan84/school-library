@@ -22,6 +22,14 @@ class App
 end
 
 def preserve_data(session)
+  files = ['people.json', 'books.json', 'rentals.json']
+  files.each do |file|
+    unless File.exist?(file)
+      puts "creating file: #{file}"
+      File.new(file, 'w')
+    
+    end
+  end
   
   # people
   puts 'saving person data...'

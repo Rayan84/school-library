@@ -1,21 +1,9 @@
 [
   {
-    "id": 9436,
-    "name": "teacher",
-    "age": "44",
+    "id": 8697,
+    "name": "name",
+    "age": "55",
     "specialization": "any",
     "class": "Teacher"
-  },
-  {
-    "id": 2937,
-    "age": 12,
-    "name": "nn",
-    "class": "Student"
-  },
-  {
-    "id": 8597,
-    "age": 10,
-    "name": "name",
-    "class": "Student"
   }
 ]
